@@ -6,6 +6,8 @@ import java.util.Objects;
 import com.walmir.gestorfinanceiro.domain.enums.TransactionType;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,6 +22,8 @@ public class Transaction {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String title;
+
+	@Enumerated(EnumType.STRING)
 	private TransactionType type;
 	private Instant date;
 	private Double amount;
@@ -34,13 +38,14 @@ public class Transaction {
 
 	public Transaction() {}
 
-	public Transaction(Long id, String title, TransactionType type, Instant date, Double amount) {
+	public Transaction(Long id, String title, TransactionType type, Instant date, Double amount, Category category) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.type = type;
 		this.date = date;
 		this.amount = amount;
+		this.category = category;
 	}
 
 	public Long getId() {
@@ -75,11 +80,11 @@ public class Transaction {
 		this.date = date;
 	}
 
-	public Double getValue() {
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setValue(Double amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 

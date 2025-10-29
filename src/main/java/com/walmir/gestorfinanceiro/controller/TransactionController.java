@@ -15,34 +15,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.walmir.gestorfinanceiro.domain.model.User;
-import com.walmir.gestorfinanceiro.service.UserService;
+import com.walmir.gestorfinanceiro.domain.model.Transaction;
+import com.walmir.gestorfinanceiro.service.TransactionService;
 
 @RestController
-@RequestMapping(value = "/users")
-public class UserController {
+@RequestMapping(value = "/transactions")
+public class TransactionController {
 
 	@Autowired
-	private UserService service;
+	private TransactionService service;
 
 	@GetMapping
-	public ResponseEntity<List<User>> findAll() {
+	public ResponseEntity<List<Transaction>> findAll() {
 
-		List<User> list = service.findAll();
+		List<Transaction> list = service.findAll();
 
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<User> findById(@PathVariable Long id) {
-		User entity = service.findbyId(id);
+	public ResponseEntity<Transaction> findById(@PathVariable Long id) {
+		Transaction entity = service.findbyId(id);
 
 		return ResponseEntity.ok().body(entity);
 	}
 
 	@PostMapping
-	public ResponseEntity<User> insert (@RequestBody User entity) {
-		User newEntity = service.insert(entity);
+	public ResponseEntity<Transaction> insert (@RequestBody Transaction entity) {
+		Transaction newEntity = service.insert(entity);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newEntity.getId()).toUri();
 		return ResponseEntity.created(uri).body(newEntity);
 	}
@@ -54,8 +54,8 @@ public class UserController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<User> update (@PathVariable Long id, @RequestBody User newEntity) {
-		User entity = service.update(newEntity, id);
+	public ResponseEntity<Transaction> update (@PathVariable Long id, @RequestBody Transaction newEntity) {
+		Transaction entity = service.update(newEntity, id);
 		return ResponseEntity.ok().body(entity);
 	}
 

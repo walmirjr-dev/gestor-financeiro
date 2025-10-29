@@ -28,10 +28,10 @@ public class UserService {
 		return repository.save(object);
 	}
 
-	public User update(User newUser, Long id) {
+	public User update(User newEntity, Long id) {
 		User entity = repository.findById(id)
 				.orElseThrow(() -> new RuntimeException("No user found in Id: " + id));
-		updateData(entity, newUser);
+		updateData(entity, newEntity);
 
 		return repository.save(entity);
 	}
@@ -49,10 +49,10 @@ public class UserService {
 
 	}
 
-	private void updateData(User entity, User newUser) {
-		entity.setEmail(newUser.getEmail());
-		entity.setName(newUser.getName());
-		entity.setPassword(newUser.getPassword());
+	private void updateData(User entity, User newEntity) {
+		entity.setEmail(newEntity.getEmail());
+		entity.setName(newEntity.getName());
+		entity.setPassword(newEntity.getPassword());
 	}
 
 }

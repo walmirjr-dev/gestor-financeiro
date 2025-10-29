@@ -15,34 +15,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.walmir.gestorfinanceiro.domain.model.User;
-import com.walmir.gestorfinanceiro.service.UserService;
+import com.walmir.gestorfinanceiro.domain.model.Category;
+import com.walmir.gestorfinanceiro.service.CategoryService;
 
 @RestController
-@RequestMapping(value = "/users")
-public class UserController {
+@RequestMapping(value = "/categories")
+public class CategoryController {
 
 	@Autowired
-	private UserService service;
+	private CategoryService service;
 
 	@GetMapping
-	public ResponseEntity<List<User>> findAll() {
+	public ResponseEntity<List<Category>> findAll() {
 
-		List<User> list = service.findAll();
+		List<Category> list = service.findAll();
 
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<User> findById(@PathVariable Long id) {
-		User entity = service.findbyId(id);
+	public ResponseEntity<Category> findById(@PathVariable Long id) {
+		Category entity = service.findbyId(id);
 
 		return ResponseEntity.ok().body(entity);
 	}
 
 	@PostMapping
-	public ResponseEntity<User> insert (@RequestBody User entity) {
-		User newEntity = service.insert(entity);
+	public ResponseEntity<Category> insert (@RequestBody Category entity) {
+		Category newEntity = service.insert(entity);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newEntity.getId()).toUri();
 		return ResponseEntity.created(uri).body(newEntity);
 	}
@@ -54,8 +54,8 @@ public class UserController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<User> update (@PathVariable Long id, @RequestBody User newEntity) {
-		User entity = service.update(newEntity, id);
+	public ResponseEntity<Category> update (@PathVariable Long id, @RequestBody Category newEntity) {
+		Category entity = service.update(newEntity, id);
 		return ResponseEntity.ok().body(entity);
 	}
 
