@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.walmir.gestorfinanceiro.domain.enums.TransactionType;
 import com.walmir.gestorfinanceiro.domain.model.Transaction;
 import com.walmir.gestorfinanceiro.repository.TransactionRepository;
 
@@ -55,6 +56,23 @@ public class TransactionService {
 		entity.setDate(newEntity.getDate());
 		entity.setAmount(newEntity.getAmount());
 		entity.setCategory(newEntity.getCategory());
+	}
+
+	public double getBalance(Long userId) {
+
+		List<Transaction> transactions = repository.findByUserId(userId);
+
+		double balance = 0;
+
+		for (Transaction t : transactions) {
+			if(t.getType() == TransactionType.INCOME) {
+				balance += t.getAmount();
+			} else {
+				balance -= t.getAmount();
+			}
+		}
+
+		return balance;
 	}
 
 }
