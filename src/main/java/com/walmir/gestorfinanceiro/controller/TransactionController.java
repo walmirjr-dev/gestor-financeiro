@@ -1,6 +1,7 @@
 package com.walmir.gestorfinanceiro.controller;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.walmir.gestorfinanceiro.domain.enums.TransactionType;
 import com.walmir.gestorfinanceiro.domain.model.Transaction;
 import com.walmir.gestorfinanceiro.service.TransactionService;
 
@@ -26,9 +29,18 @@ public class TransactionController {
 	private TransactionService service;
 
 	@GetMapping
-	public ResponseEntity<List<Transaction>> findAll() {
+	public ResponseEntity<List<Transaction>> findAllFiltered(
+			@RequestParam(required = false) String title,
+			@RequestParam(required = false) Long categoryId,
+		    @RequestParam(required = false) TransactionType type ,
+		    @RequestParam(required = false) LocalDate startDate,
+		    @RequestParam(required = false) LocalDate endDate,
+		    @RequestParam(required = false) Double minValue,
+		    @RequestParam(required = false) Double maxValue)
+	{
 
-		List<Transaction> list = service.findAll();
+		System.out.println("Keyword recebida: '" + title + "'");
+		List<Transaction> list = service.findAllFiltered(title, categoryId, type, startDate, endDate, minValue, maxValue);
 
 		return ResponseEntity.ok().body(list);
 	}

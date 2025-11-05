@@ -1,5 +1,6 @@
 package com.walmir.gestorfinanceiro.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,16 @@ public class TransactionService {
 	@Autowired
 	private TransactionRepository repository;
 
-	public List<Transaction> findAll() {
-		return repository.findAll();
+	public List<Transaction> findAllFiltered(
+			String title,
+			Long categoryId,
+			TransactionType type,
+			LocalDate startDate,
+			LocalDate endDate,
+			Double minValue,
+			Double maxValue
+			) {
+		return repository.filter(title, categoryId, type, startDate, endDate, minValue, maxValue);
 	}
 
 	public Transaction findbyId(Long id) {

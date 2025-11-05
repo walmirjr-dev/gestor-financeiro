@@ -1,6 +1,6 @@
 package com.walmir.gestorfinanceiro.config;
 
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +38,8 @@ public class TestConfig implements CommandLineRunner {
 		Category c1 = new Category(null, "Education");
 		Category c2 = new Category(null, "Salary");
 
-		Transaction t1 = new Transaction(null, "Salario mes 10", TransactionType.INCOME, Instant.now(), 3200.00, c2);
-		Transaction t2 = new Transaction(null, "curso", TransactionType.EXPENSE, Instant.now(), 200.00, c1);
+		Transaction t1 = new Transaction(null, "Salario mes 10", TransactionType.INCOME, LocalDate.now(), 3200.00, c2);
+		Transaction t2 = new Transaction(null, "curso", TransactionType.EXPENSE, LocalDate.now(), 200.00, c1);
 
 		t1.setUser(u2);
 		t2.setUser(u2);

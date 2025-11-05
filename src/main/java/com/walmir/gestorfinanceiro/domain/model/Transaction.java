@@ -1,6 +1,6 @@
 package com.walmir.gestorfinanceiro.domain.model;
 
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import com.walmir.gestorfinanceiro.domain.enums.TransactionType;
@@ -25,7 +25,7 @@ public class Transaction {
 
 	@Enumerated(EnumType.STRING)
 	private TransactionType type;
-	private Instant date;
+	private LocalDate date;
 	private Double amount;
 
 	@ManyToOne
@@ -38,7 +38,7 @@ public class Transaction {
 
 	public Transaction() {}
 
-	public Transaction(Long id, String title, TransactionType type, Instant date, Double amount, Category category) {
+	public Transaction(Long id, String title, TransactionType type, LocalDate date, Double amount, Category category) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -72,11 +72,11 @@ public class Transaction {
 		this.type = type;
 	}
 
-	public Instant getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Instant date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
