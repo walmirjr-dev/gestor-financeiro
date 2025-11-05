@@ -59,4 +59,11 @@ public class TransactionController {
 		return ResponseEntity.ok().body(entity);
 	}
 
+	@GetMapping(value = "/balance/{userId}")
+	public ResponseEntity<Double> getBalance (@PathVariable Long userId) {
+		Double balance = service.getBalance(userId);
+
+		return ResponseEntity.ok().body(balance);
+	}
+
 }
