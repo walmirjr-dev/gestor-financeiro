@@ -67,6 +67,8 @@ public class TransactionService {
 		entity.setCategory(newEntity.getCategory());
 	}
 
+
+	// refatorar para fazer SUM direto no banco.
 	public double getBalance(Long userId) {
 
 		List<Transaction> transactions = repository.findByUserId(userId);

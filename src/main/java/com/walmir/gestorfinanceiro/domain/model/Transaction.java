@@ -40,11 +40,11 @@ public class Transaction {
 
 	public Transaction(Long id, String title, TransactionType type, LocalDate date, Double amount, Category category) {
 		super();
+		setAmount(amount);
 		this.id = id;
 		this.title = title;
 		this.type = type;
 		this.date = date;
-		this.amount = amount;
 		this.category = category;
 	}
 
@@ -85,6 +85,9 @@ public class Transaction {
 	}
 
 	public void setAmount(Double amount) {
+		if(amount <=0) {
+			throw new IllegalArgumentException("The value must be positive.");
+		}
 		this.amount = amount;
 	}
 

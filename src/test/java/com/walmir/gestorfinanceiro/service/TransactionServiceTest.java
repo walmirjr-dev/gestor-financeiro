@@ -3,7 +3,7 @@ package com.walmir.gestorfinanceiro.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
@@ -29,8 +29,8 @@ public class TransactionServiceTest {
 	void getBalanceShouldReturnSumOfTransactions() {
 		Long userId = 1L;
 
-		Transaction t1 = new Transaction(1L, "Income", TransactionType.INCOME, Instant.now(), 200.00, null);
-		Transaction t2 = new Transaction(2L, "Expense", TransactionType.EXPENSE, Instant.now(), 100.00, null);
+		Transaction t1 = new Transaction(1L, "Income", TransactionType.INCOME, LocalDate.now(), 200.00, null);
+		Transaction t2 = new Transaction(2L, "Expense", TransactionType.EXPENSE, LocalDate.now(), 100.00, null);
 
 		when(repository.findByUserId(userId))
 	        .thenReturn(Arrays.asList(t1, t2));
